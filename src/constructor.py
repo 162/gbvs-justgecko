@@ -35,13 +35,14 @@ def constructor(M, sigma, kind='log'):
                 for q in range(len(M[i])):
                     if p != i or q != j:
                         g.add_edge(get_name(i, j), get_name(p, q), weight(M, [i, j], [p, q], kind, sigma))
+    g.normalize()
     return g
 
 
-M = [[0, 1, 2, 1, 0],
-     [1, 1, 2, 1, 1],
+M = [[1, 2, 3, 2, 1],
+     [2, 2, 3, 2, 2],
+     [3, 3, 3, 3, 3],
      [2, 2, 2, 2, 2],
-     [1, 1, 2, 1, 1],
-     [0, 1, 2, 1, 0]]
+     [1, 2, 3, 2, 1]]
 g = constructor(M, 1)
 g.show()
