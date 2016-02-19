@@ -28,14 +28,14 @@ class Graph():
                 print ("\t", edge.destination, ":", edge.weight)
 
 
-
-g = Graph()
-n = 4
-for x in range(n):
-    for y in range(n):
-        if x != y:
-            g.add_edge(x, y, 1)
-g.show()
-g.normalize()
-print
-g.show()
+def test():
+    g = Graph()
+    n = 4
+    for x in range(n):
+        for y in range(n):
+            if x != y:
+                g.add_edge(x, y, 1)
+    g.show()
+    g.normalize()
+    print
+    g.show()
