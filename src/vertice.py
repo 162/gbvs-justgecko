@@ -1,4 +1,4 @@
-from src.edge import Edge
+from edge import Edge
 
 
 class Vertice():

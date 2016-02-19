@@ -1,7 +1,9 @@
-from src.graph import Graph
+# -*- coding: Windows-1251 -*-
+
+from graph import Graph
 from math import log, exp
 
-'''РЇ РЅРµ Р·РЅР°СЋ, РєР°Рє РЅР°Р·Р·РІР°С‚СЊ СЌС‚РѕС‚ С„Р°Р№Р». РћРЅ РїРѕ РєР°СЂС‚Рµ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё (feature  map) СЃС‚СЂРѕРёС‚СЊ РіСЂР°С„'''
+'''Я не знаю, как наззвать этот файл. Он по карте характеристики (feature  map) строить граф'''
 
 
 def get_name(i, j):
@@ -14,7 +16,7 @@ def distance(a, b, kind):
             a = 0.01
         if b == 0:
             b = 0.01
-        return abs(log(a/b))
+        return abs(log(float(a)/float(b)))
     if kind == 'mod':
         return abs(a-b)
 
@@ -39,10 +41,11 @@ def constructor(M, sigma, kind='log'):
     return g
 
 
-M = [[1, 2, 3, 2, 1],
-     [2, 2, 3, 2, 2],
-     [3, 3, 3, 3, 3],
-     [2, 2, 2, 2, 2],
-     [1, 2, 3, 2, 1]]
-g = constructor(M, 1)
+#M = [[1, 2, 3, 2, 1],
+#     [2, 2, 3, 2, 2],
+#     [3, 3, 3, 3, 3],
+#     [2, 2, 2, 2, 2],
+#    [1, 2, 3, 2, 1]]
+M = [[1, 2, 1], [2, 3, 2], [1, 2, 1]]
+g = constructor(M, 0.1)
 g.show()

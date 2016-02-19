@@ -1,4 +1,4 @@
-from src.vertice import Vertice
+from vertice import Vertice
 
 
 class Graph():
@@ -23,9 +23,9 @@ class Graph():
 
     def show(self):
         for point in self.points:
-            print(point, ':')
+            print point, ':'
             for edge in self.points[point].edges:
-                print ("\t", edge.destination, ":", edge.weight)
+                print "\t", edge.destination, ":", edge.weight
 
 
 def test():
