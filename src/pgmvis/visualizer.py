@@ -20,7 +20,7 @@ def load_test(path, width, height, mode):
 
 
 def draw_picture(array, save_as, x0, y0, scale, mode, to_save=False):
-    DISPLAY = (520, 320)
+    DISPLAY = (400, 400)
     pygame.init()
     flags = pygame.DOUBLEBUF | pygame.HWSURFACE
     # screen = pygame.display.set_mode(DISPLAY)

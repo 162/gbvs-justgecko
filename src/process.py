@@ -4,20 +4,15 @@ from time import clock
 import pygame
 
 # standard of pictures
-X0 = 40
+X0 = 0
 X1 = 290
-Y0 = 40
-SCALE = 5
+Y0 = 0
+SCALE = 10
 
 
 def process_fmap(fmap, sigma, iterations, save_as):
     start = clock()
     print "STATUS: STARTING"
-    try:
-        #draw_picture(fmap, save_as, X0, Y0, SCALE, 'normal')
-        pass
-    except SystemExit:
-        pass
     print "STATUS: BUILDING ACTIVITY MAP"
     try:
         fmap = build_activity_map(fmap, sigma, iterations)
@@ -25,7 +20,7 @@ def process_fmap(fmap, sigma, iterations, save_as):
     except:
         print "STATUS: ACTIVITY MAP WAS FAILED"
     try:
-        draw_picture(fmap, save_as, X1, Y0, SCALE, 'normalized', to_save=True)
+        draw_picture(fmap, save_as, X0, Y0, SCALE, 'normalized', to_save=True)
     except SystemExit:
         pass
     print "STATUS: FINISHED"

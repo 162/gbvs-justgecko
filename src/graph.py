@@ -9,17 +9,17 @@ class Graph():
         self.points[name] = Vertice(name)
 
     def add_edge(self, start, destination, weight):
-        if start not in self.points.keys():
+        if start not in self.points:
             self.add_point(start)
-        if destination not in self.points.keys():
+        if destination not in self.points:
             self.add_point(destination)
         self.points[start].new_edge(destination, weight)
 
     def normalize(self):
         for i in self.points:
-            outgoing_sum = sum([edge.weight for edge in self.points[i].edges])
+            outgoing_sum = sum([self.points[i].edges[edge].weight for edge in self.points[i].edges])
             for edge in self.points[i].edges:
-                edge.weight = edge.weight/outgoing_sum
+                self.points[i].edges[edge].weight = self.points[i].edges[edge].weight/outgoing_sum
 
     def show(self):
         for point in self.points:

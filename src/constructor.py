@@ -86,10 +86,10 @@ def get_matrix(graph):
             if p == q:
                 line.append(-1)
             else:
-                element = 0
-                for edge in graph.points[points[q]].edges:
-                    if edge.destination == points[p]:
-                        element = edge.weight
+                element = graph.points[points[q]].edges[points[p]].weight
+                #for edge in graph.points[points[q]].edges:
+                #    if graph.points[points[q]].edges[edge].destination == points[p]:
+                #        element = graph.points[points[q]].edges[edge].weight
                 line.append(element)
         matrix.append(line)
     print "STATUS: MATRIX RECEIVED"
