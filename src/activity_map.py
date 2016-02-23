@@ -7,6 +7,7 @@ def build_activity_map(test, sigma, iterations):
     matrix, points = get_matrix(graph)
     activity_map = get_activity_map(matrix, points, width, height)
     for i in range(iterations):
+        print "STATUS: NORMALIZATION STEP", i
         activity_map = normalize_am(activity_map, sigma)
     return activity_map
 

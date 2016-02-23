@@ -2,14 +2,19 @@
 
 from graph import Graph
 from math import log, exp
+from time import clock
 import numpy
 
 '''Я не знаю, как наззвать этот файл. Он по карте характеристики (feature  map) строить граф'''
 
 
 def solve(A, eps=1e-15):
+    start = clock()
+    print "STATUS: SOLVING MATRIX"
     u, s, vh = numpy.linalg.svd(A)
     null_space = numpy.compress(s <= eps, vh, axis=0)
+    print "STATUS: SOLVED"
+    print "time:", clock()-start
     return null_space.T
 
 
@@ -37,10 +42,12 @@ def weight(M, a, b, kind, sigma):
 
 
 def normalization_weight(M, a, b, sigma):
-    return M[a[0]][a[1]]*f(a[0]-b[0], a[1]-b[1], sigma)
+    return M[b[0]][b[1]]*f(a[0]-b[0], a[1]-b[1], sigma)
 
 
 def get_markov_chain(M, sigma, kind='log'):
+    start = clock()
+    print "STATUS: BUILDING MARKOV CHAIN"
     g = Graph()
     for i in range(len(M)):
         for j in range(len(M[i])):
@@ -48,7 +55,11 @@ def get_markov_chain(M, sigma, kind='log'):
                 for q in range(len(M[i])):
                     if p != i or q != j:
                         g.add_edge(get_name(i, j), get_name(p, q), weight(M, [i, j], [p, q], kind, sigma))
+    print "STATUS: NORMALIZE"
+    print "time:", clock()-start
     g.normalize()
+    print "STATUS: MARKOV CHAIN BUILT"
+    print "time:", clock()-start
     return g
 
 
@@ -65,6 +76,8 @@ def get_normalization_chain(M, sigma):
 
 
 def get_matrix(graph):
+    start = clock()
+    print "STATUS: RECEIVING MATRIX FROM MARKOV CHAIN"
     matrix = []
     points = graph.points.keys()
     for p in range(len(points)):
@@ -79,6 +92,8 @@ def get_matrix(graph):
                         element = edge.weight
                 line.append(element)
         matrix.append(line)
+    print "STATUS: MATRIX RECEIVED"
+    print "time:", clock()-start
     return matrix, points
 
 
@@ -86,11 +101,14 @@ def get_activity_map(matrix, points, width, height):
     activity_map = [[0 for j in range(height)] for i in range(width)]
     a = numpy.array(matrix)
     sol = solve(a)
-    sol = [float(i[0]) for i in sol]
-    for i in range(len(sol)):
-        x, y = [int(j) for j in points[i].split('-')]
-        activity_map[x][y] = sol[i]
-    return activity_map
+    try:
+        sol = [float(i[0]) for i in sol]
+        for i in range(len(sol)):
+            x, y = [int(j) for j in points[i].split('-')]
+            activity_map[x][y] = sol[i]
+        return activity_map
+    except IndexError:
+        print sol
 
 
 def normalize_am(am, sigma):
