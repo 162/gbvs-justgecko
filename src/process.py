@@ -34,10 +34,20 @@ def full_work(path, save_as, w, h, sigma, iterations, mode='all'):
 
 
 def main():
-    for sigma in [2, 3, 4]:
-        for iterations in [0, 1, 2]:
-            for mode in ["all", "r", "g", "b"]:
-                full_work("pgmvis/pictures/test3.bmp", "pgmvis/pictures/"+str(sigma)+"-"+str(iterations)+"-"+mode+".bmp", 40, 40, sigma, iterations, mode)
-
+    start = clock()
+    for n in [5]:
+        for sigma in [2, 2.5, 3, 3.5, 4]:
+            for iterations in [0, 1, 2]:
+                for mode in ["all", "r", "g", "b"]:
+                    filename = "pgmvis/pictures/" + str(n) + "-" + str(int(2*sigma)) + "-" + str(iterations) + "-" + \
+                               mode + ".bmp"
+                    print "PROCESSING:", filename
+                    try:
+                        full_work("pgmvis/pictures/test"+str(n)+".bmp", filename, 40, 40, sigma, iterations, mode)
+                    except:
+                        pass
+    t = clock()-start
+    print 'total time for 3*5*3*4 =',  t
+    print 'per one =', t/180
 
 main()
