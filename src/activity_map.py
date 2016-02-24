@@ -2,14 +2,18 @@ from constructor import *
 
 
 def build_activity_map(test, sigma, iterations):
-    width, height = len(test), len(test[0])
-    graph = get_markov_chain(test, sigma)
-    matrix, points = get_matrix(graph)
-    activity_map = get_activity_map(matrix, points, width, height)
-    for i in range(iterations):
-        print "STATUS: NORMALIZATION STEP", i+1
-        activity_map = normalize_am(activity_map, sigma)
-    return activity_map
+    try:
+        width, height = len(test), len(test[0])
+        graph = get_markov_chain(test, sigma)
+        matrix, points = get_matrix(graph)
+        activity_map = get_activity_map(matrix, points, width, height)
+        for i in range(iterations):
+            print "STATUS: NORMALIZATION STEP", i+1
+            activity_map = normalize_am(activity_map, sigma)
+        return activity_map
+    except:
+        print "something went  wrong"
+        return test
 
 M = [[1, 2, 3, 2, 1],
      [2, 2, 3, 2, 2],

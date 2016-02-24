@@ -49,10 +49,10 @@ def get_markov_chain(M, sigma, kind='log'):
     start = clock()
     print "STATUS: BUILDING MARKOV CHAIN"
     g = Graph()
-    for i in range(len(M)):
-        for j in range(len(M[i])):
-            for p in range(len(M)):
-                for q in range(len(M[i])):
+    for i in xrange(len(M)):
+        for j in xrange(len(M[i])):
+            for p in xrange(len(M)):
+                for q in xrange(len(M[i])):
                     if p != i or q != j:
                         g.add_edge(get_name(i, j), get_name(p, q), weight(M, [i, j], [p, q], kind, sigma))
     print "STATUS: NORMALIZE"
